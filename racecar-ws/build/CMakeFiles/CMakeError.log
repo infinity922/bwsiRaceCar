@@ -1,0 +1,56 @@
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/ubuntu/racecar-ws/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_72cff/fast"
+/usr/bin/make -f CMakeFiles/cmTC_72cff.dir/build.make CMakeFiles/cmTC_72cff.dir/build
+make[1]: Entering directory '/home/ubuntu/racecar-ws/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_72cff.dir/CheckSymbolExists.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_72cff.dir/CheckSymbolExists.c.o   -c /home/ubuntu/racecar-ws/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_72cff
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_72cff.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_72cff.dir/CheckSymbolExists.c.o  -o cmTC_72cff -rdynamic 
+CMakeFiles/cmTC_72cff.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0x14): undefined reference to `pthread_create'
+CheckSymbolExists.c:(.text+0x18): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_72cff.dir/build.make:97: recipe for target 'cmTC_72cff' failed
+make[1]: *** [cmTC_72cff] Error 1
+make[1]: Leaving directory '/home/ubuntu/racecar-ws/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_72cff/fast' failed
+make: *** [cmTC_72cff/fast] Error 2
+
+File /home/ubuntu/racecar-ws/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/ubuntu/racecar-ws/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_16cad/fast"
+/usr/bin/make -f CMakeFiles/cmTC_16cad.dir/build.make CMakeFiles/cmTC_16cad.dir/build
+make[1]: Entering directory '/home/ubuntu/racecar-ws/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_16cad.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_16cad.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.5/Modules/CheckFunctionExists.c
+Linking C executable cmTC_16cad
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_16cad.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_16cad.dir/CheckFunctionExists.c.o  -o cmTC_16cad -rdynamic -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_16cad.dir/build.make:97: recipe for target 'cmTC_16cad' failed
+make[1]: *** [cmTC_16cad] Error 1
+make[1]: Leaving directory '/home/ubuntu/racecar-ws/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_16cad/fast' failed
+make: *** [cmTC_16cad/fast] Error 2
+
+
