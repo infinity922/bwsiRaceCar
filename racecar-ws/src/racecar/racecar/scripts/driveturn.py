@@ -19,7 +19,7 @@ now = 0
 now_set = False
 
 #just need to mesure the wheelbase for this one. The equation requires it to be divided in two
-WheelBase = 
+WheelBase = 32.5 
 WheelBase = WheelBase/2
 
 def run(data):
