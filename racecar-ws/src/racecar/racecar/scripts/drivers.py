@@ -33,22 +33,22 @@ def pd(error, pgain, dgain, speed):
 # this drives the robot based on it's distance from the right wall
 # it is passed the lidar data, the target distance from the right wall, and a speed
 def driveright(data, distance, speed):
-    error = min(data.ranges[200:540]) - distance
+    error = min(data.ranges[200:440]) - distance
     pd(error, 1.5, 15, speed)
 
 
 # this drives the robot based on it's distance from the left wall
 # it is passed the lidar data, the target distance from the left wall, and a speed
 def driveleft(data, distance, speed):
-    error = min(data.ranges[540:880]) - distance
+    error = min(data.ranges[640:880]) - distance
     pd(error, 1.5, 15, speed)
 
 
 # this drives the robot in the middle of two walls
 # it is passed the lidar data, and a speed
 def drivecenter(data, speed):
-    error = min(data.ranges[540:880]) - min(data.ranges[200:540])
-    pd(error, 1.5, 15, speed)
+    error = min(data.ranges[640:880]) - min(data.ranges[200:440])
+    pd(error, 1.5, 6, speed)
 
 
 # this drives the car between two walls with a decimal used as the position between the walls,
@@ -57,7 +57,13 @@ def drivecenter(data, speed):
 # !!! this is untested !!!
 # !!! we should add a min distance from either wall, to prevent collisions !!!
 def drivedecimal(data, decimal, speed):
-    error = min(data.ranges[540:880])*decimal - min(data.ranges[200:540])*(1-decimal)
+    error = (min(data.ranges[640:880])-0.3)*decimal - (min(data.ranges[200:440])-0.3)*(1-decimal)
     pd(error, 1.5, 15, speed)
+
+    
+
+
+def stop():
+    drive(0, 0)
 
 
