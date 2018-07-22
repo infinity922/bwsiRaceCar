@@ -25,8 +25,8 @@ class Follower:
                 
                 hsvv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
                 # define range of color in HSV
-                lower = np.array([100,50,50])
-                upper = np.array([160,255,255])
+                lower = np.array([10,50,170])
+                upper = np.array([25,255,255])
 
                 # define range of red color in HSV
                 #lower = np.array([0,50,50])
@@ -81,35 +81,38 @@ class Follower:
 
                     i = i + 1
 
-                print("Biggest area is ", np.amax(a))
-                print("corresponds to contour no: ", np.argmax(a))
-                cX = 0
-                cc = np.argmax(a)
-  	        M = cv2.moments(contours[cc])
-                area = int(M["m00"])
-                
-                if (area == 0):
-                    cX = 50
-                    cY = 50
+                if len(a) != 0: 
+			print("Biggest area is ", np.amax(a))
+			print("corresponds to contour no: ", np.argmax(a))
+			cX = 0
+			cc = np.argmax(a)
+			M = cv2.moments(contours[cc])
+			area = int(M["m00"])
 
-                if (area > 0):	
-                    cX = int(M["m10"] / M["m00"])
-	            cY = int(M["m01"] / M["m00"])
+			if (area > 0):	
+			    cX = int(M["m10"] / M["m00"])
+			    cY = int(M["m01"] / M["m00"])
+			else:
+				cX = 0
+				cY = 0
 
-	        cv2.drawContours(res_red, contours[cc], -1, (0, 255, 0), 2)
-	        cv2.circle(res_red, (cX, cY), 7, (0, 255, 255), -1)
-                text = "center" + str(cc) + " area: " + str(area)
-	        cv2.putText(res_red, text, (cX - 20, cY - 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 2)
-
+			cv2.drawContours(res_red, contours[cc], -1, (0, 255, 0), 2)
+			cv2.circle(res_red, (cX, cY), 7, (0, 255, 255), -1)
+			text = "center" + str(cc) + " area: " + str(area)
+			cv2.putText(res_red, text, (cX - 20, cY - 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 2)
+		else:
+			cX = 320
+			cY = 50
 
 #		cv2.imshow('original', image)
 		#cv2.imshow('contours', res_red)
-		
+		#cv2.waitKey(0)
 		cv2.destroyAllWindows()
+		
 		self.isOpen = False
 		print(cX)
         error = (float(cX)-320)/320
-        drivers.pd(error, -.5, -15, 0)
+        drivers.pd(error, -2, -10, 1)
 	print error
         
 
